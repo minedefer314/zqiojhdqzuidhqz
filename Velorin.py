@@ -1,8 +1,6 @@
-import os
 import pyautogui
 import time
 import keyboard
-import psutil
 import win32gui
 import numpy as np
 
@@ -34,14 +32,6 @@ def get_mouse_color():
     screenshot = pyautogui.screenshot()
     return screenshot.getpixel((x, y))
 
-def terminate_process():
-    pid = os.getpid()
-    parent = psutil.Process(pid)
-    for child in parent.children(recursive=True):
-        child.terminate()
-    parent.terminate()
-    os._exit(0)
-
 def main():
     color_to_find = None
     region = None
@@ -57,7 +47,7 @@ def main():
             pyautogui.click()
             time.sleep(0.4)
         elif keyboard.is_pressed('f2'):
-            terminate_process()
+            break
         else:
             time.sleep(0.01)
 if __name__ == '__main__':
